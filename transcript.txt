@@ -1,14 +1,8 @@
-first install mongodb:
-https://www.mongodb.com/try/download/community
-why? because it takes time!
+1. I can create the class inside
+2. when ready i'll just ctl+. to put it in a separate file.
 
-why nosql?
-1. as an app grow CUD becomes harder with the importance of normalization
-2. nosql is rting to solve this issue
+3. I can use same MongoCRUD calss all the time or use only when I need: create => use => destroy 
+4. we'll name our DB AddressBook
+5. if 'AddressBook' it will connect to it, otherwise it will create it;
 
-3. we are going to create a db in the code.
-
-
-4. create a Console app
-5. install MongoDB.Driver nuget (install nuget gallery if needed)
-6. 
+6. the connection string is going into the MongoClient constructor, we'll keep it blank to it connect to localhost's running server
