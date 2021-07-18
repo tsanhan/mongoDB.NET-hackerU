@@ -1,8 +1,18 @@
-1. I can create the class inside
-2. when ready i'll just ctl+. to put it in a separate file.
+1. create an insert record method
+2. why the method is generic? 
+    we havent defined any type/object or a scheme for the table to look like.
+    the generics help us to have some structure(it's optional)
+    so the what we saying is that the table it of T type.
+    but we havent defined any AddressBook db or any T object scheme table.
+    how does mongo do that insert?
+    THAT'S the beauty of MongoDB, think of it as a object storage.
 
-3. I can use same MongoCRUD calss all the time or use only when I need: create => use => destroy 
-4. we'll name our DB AddressBook
-5. if 'AddressBook' it will connect to it, otherwise it will create it;
+3. so let's create an object, a Person.
+4. and use the InserRecord to insert the newley object into the newley table in a newley db...
+5. run the code...
+6. why this works?
+     that the InsertOne does is taking that T onject and convert it to JSON.
+     behind the seans mongo stores an optimized version of the JSON called Binary JSON (BSON)
 
-6. the connection string is going into the MongoClient constructor, we'll keep it blank to it connect to localhost's running server
+7. so there is no structure, not ideal but possible.
+
