@@ -1,0 +1,14 @@
+first install mongodb:
+https://www.mongodb.com/try/download/community
+why? because it takes time!
+
+why nosql?
+1. as an app grow CUD becomes harder with the importance of normalization
+2. nosql is rting to solve this issue
+
+3. we are going to create a db in the code.
+
+
+4. create a Console app
+5. install MongoDB.Driver nuget (install nuget gallery if needed)
+6. 
