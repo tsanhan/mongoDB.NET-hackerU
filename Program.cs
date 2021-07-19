@@ -1,4 +1,5 @@
 ﻿using System;
+using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
 
 namespace MongoDB.NET
@@ -9,6 +10,7 @@ namespace MongoDB.NET
         {
 
             MongoCRUD db = new MongoCRUD("AddressBook");
+
             db.InserRecord("Users", new PersonModel { FirstName = "Victor", LastName = "Yampolsky" });
             System.Console.WriteLine("done program");
             Console.ReadLine();
@@ -17,12 +19,15 @@ namespace MongoDB.NET
 
     public class PersonModel
     {
+        [BsonId]
+        public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
 
 
     }
+
     public class MongoCRUD
     {
         private IMongoDatabase db;
@@ -37,6 +42,8 @@ namespace MongoDB.NET
         {
             var collection = db.GetCollection<T>(table);
             collection.InsertOne(record);
+
+
         }
 
 
