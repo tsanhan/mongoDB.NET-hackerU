@@ -10,8 +10,21 @@ namespace MongoDB.NET
         {
 
             MongoCRUD db = new MongoCRUD("AddressBook");
+            PersonModel person = new PersonModel
+            {
+                FirstName = "VicVic",
+                LastName = "YamYam",
+                PrimaryAddress = new AddressModel
+                {
+                    city = "JLM",
+                    State = "ISL",
+                    StreetAddress = "Arie Ben Eliezer",
+                    ZipCode = "98321"
+                }
+            };
 
-            db.InserRecord("Users", new PersonModel { FirstName = "Victor", LastName = "Yampolsky" });
+
+            db.InserRecord("Users", person);
             System.Console.WriteLine("done program");
             Console.ReadLine();
         }
@@ -24,10 +37,20 @@ namespace MongoDB.NET
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
+        public AddressModel PrimaryAddress { get; set; }
 
 
     }
 
+    public class AddressModel
+    {
+        public string StreetAddress { get; set; }
+        public string city { get; set; }
+        public string State { get; set; }
+        public string ZipCode { get; set; }
+
+
+    }
     public class MongoCRUD
     {
         private IMongoDatabase db;

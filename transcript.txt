@@ -1,10 +1,16 @@
-1. lets change something: addd GUID to the Model;
-2. [BsonId] will be mongo's Id for this table so InsertOne will:
-    - store as _id, don't warry about 'Id' => '_id' naming mepping
-    - create one if no Id was provided
-    why is it a nice functionality?
-    we can check if Id exsist to determine if it's an update or create operation
+1. lets add Address (with AddressModel) to Person and build a real model to insert
 
-3. if we run the code we'll see the Person created.
-4. so terminoligy wise: table => collection, record/row => document
+2. and insert it to the tble, this does NOT match the previos two.
+3. why this is cool? 
+    on any chnage/prop addition you dont need to adjast the schema and create new recods
 
+4. what is the other side of the coin (no normalization)? it's code duplication, why?
+    because every record is the authority of data within:
+    lat's assume the collation 'Users' is the Users data.
+    two married people's record are in this collection.
+    they both wil have the same address, right?
+    so, if you are a DRY juncky and dont want to deduplicate this...
+    look how easy it is to.. say make CRUD oporations on the address of a user... no quering!!!
+    
+5. so what is the drade here (there is always one!)? it's space for speed.
+6. great value for lots of data (like facebook or twetter )
