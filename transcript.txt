@@ -1,16 +1,13 @@
-1. lets add Address (with AddressModel) to Person and build a real model to insert
+1. lets get data
+2. Find returns IFindFluent it's like the reference to the query.
+3. the toList is the actual command that runs the query
+4. implement the usage in the main method
 
-2. and insert it to the tble, this does NOT match the previos two.
-3. why this is cool? 
-    on any chnage/prop addition you dont need to adjast the schema and create new recods
+5. what if I dont want toread everying, only one? - implementing LoadRecordById
 
-4. what is the other side of the coin (no normalization)? it's code duplication, why?
-    because every record is the authority of data within:
-    lat's assume the collation 'Users' is the Users data.
-    two married people's record are in this collection.
-    they both wil have the same address, right?
-    so, if you are a DRY juncky and dont want to deduplicate this...
-    look how easy it is to.. say make CRUD oporations on the address of a user... no quering!!!
-    
-5. so what is the drade here (there is always one!)? it's space for speed.
-6. great value for lots of data (like facebook or twetter )
+6. how will I get the Guid to get the record? (going to the Compass and copy the _id will give me the Binary version...)
+7. so lets get all the records and breakpoint in the program to see what we got:
+8. we can get the goid from one of the records returend
+9. why do you think LoadRecordById or LoadRecords methods are generic?
+
+10. continuing next to Update and Delete...
