@@ -1,13 +1,19 @@
-1. lets get data
-2. Find returns IFindFluent it's like the reference to the query.
-3. the toList is the actual command that runs the query
-4. implement the usage in the main method
+1. build an Upsert  method: like PUT (insert or update).
+    the idea is resemling a merge
 
-5. what if I dont want toread everying, only one? - implementing LoadRecordById
+2. build a Delete method
 
-6. how will I get the Guid to get the record? (going to the Compass and copy the _id will give me the Binary version...)
-7. so lets get all the records and breakpoint in the program to see what we got:
-8. we can get the goid from one of the records returend
-9. why do you think LoadRecordById or LoadRecords methods are generic?
+3. lets use these methods, but before that lets add a property to our model.
+    two things I want to do with this:
+        1. i want to use the correct values when inserting this data (utc - universal time code, not local)
+        2. the second thig is that I want to change the name from DateOfBirth to dob 
+            for 2: we'll use a BsonElement decorator;
+            for 1: we'll create the correct datetime add add it
+4. after viewing in the db the result we can conclude that we updated the record;
 
-10. continuing next to Update and Delete...
+5. lets delete the record
+    comment the Upsert and use the delete method 
+
+6. so far I have tweaked the PersonModel a bit but not too much.
+lets create a new model to use ( for the same data... whaaaaaat?!?!?)
+

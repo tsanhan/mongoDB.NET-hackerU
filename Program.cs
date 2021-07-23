@@ -40,8 +40,13 @@ namespace MongoDB.NET
             // }
 
 
-            var recs = db.LoadRecords<PersonModel>("Users");
             var oneRec = db.LoadRecordById<PersonModel>("Users", new Guid("240569c5-85ec-4fd7-99a5-5723ddfccea8"));
+            // 3
+            // oneRec.DateOfBirth = new DateTime(1985, 3, 25, 0, 0, 0, DateTimeKind.Utc);
+            // db.UpsertRecord<PersonModel>("Users", oneRec.Id, oneRec);
+
+            //5
+            db.DeleteRecord<PersonModel>("Users", oneRec.Id);
 
             Console.ReadLine();
         }
@@ -56,6 +61,8 @@ namespace MongoDB.NET
 
         public AddressModel PrimaryAddress { get; set; }
 
+        [BsonElement("dob")]
+        public DateTime DateOfBirth { get; set; }
 
     }
 
@@ -103,6 +110,31 @@ namespace MongoDB.NET
         }
 
 
+        /**
+        UpsertRecord:
+        - create a binData to search by
+        - look for a record with this data
+        - found it? great now replace
+        - didn't find it? ok, then add a nerw one i.e IsUpsert = true! 
+        */
+        public void UpsertRecord<T>(string table, Guid id, T record)
+        {
+            BsonBinaryData binData = new BsonBinaryData(id, GuidRepresentation.Standard);
+            var collection = db.GetCollection<T>(table);
+
+            var result = collection.ReplaceOne(
+               new BsonDocument("_id", binData),
+                record,
+                new ReplaceOptions { IsUpsert = true });
+        }
+
+        public void DeleteRecord<T>(string table, Guid id)
+        {
+            var collection = db.GetCollection<T>(table);
+            var filter = Builders<T>.Filter.Eq("Id", id);
+            collection.DeleteOne(filter);
+
+        }
 
     }
 }
