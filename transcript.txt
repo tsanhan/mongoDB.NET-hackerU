@@ -1,19 +1,26 @@
-1. build an Upsert  method: like PUT (insert or update).
-    the idea is resemling a merge
+1. lets use a new model (NameModel) to show data:
+    creating new model (NameModel)
 
-2. build a Delete method
+2. we'll print relevant fields from the new NameModel
 
-3. lets use these methods, but before that lets add a property to our model.
-    two things I want to do with this:
-        1. i want to use the correct values when inserting this data (utc - universal time code, not local)
-        2. the second thig is that I want to change the name from DateOfBirth to dob 
-            for 2: we'll use a BsonElement decorator;
-            for 1: we'll create the correct datetime add add it
-4. after viewing in the db the result we can conclude that we updated the record;
+3. we get a mapping model, try to find out the solutions (at least one):
+    answer: 
+        1. add [BsonIgnoreExtraElements] annotation above the new model
+        2. add:
+            var pack = new ConventionPack();
+            pack.Add(new IgnoreExtraElementsConvention(true));
+            ConventionRegistry.Register("My Solution Conventions", pack, t => true);
 
-5. lets delete the record
-    comment the Upsert and use the delete method 
+            somewhere when creating the mongo client;
+        3. add:
+            BsonClassMap.RegisterClassMap<NameModel>(cm =>
+            {
+                cm.AutoMap();
+                cm.SetIgnoreExtraElements(true);
+            });
+            
+            when you initialize your driver.
 
-6. so far I have tweaked the PersonModel a bit but not too much.
-lets create a new model to use ( for the same data... whaaaaaat?!?!?)
+4. lets put everithing in it's own file
+
 
