@@ -1,26 +1,70 @@
-1. lets use a new model (NameModel) to show data:
-    creating new model (NameModel)
+1. so we have learn abit about how to use MongoDB and some senerios you'll se it used for
 
-2. we'll print relevant fields from the new NameModel
+2. when to use it and why to use it:
 
-3. we get a mapping model, try to find out the solutions (at least one):
-    answer: 
-        1. add [BsonIgnoreExtraElements] annotation above the new model
-        2. add:
-            var pack = new ConventionPack();
-            pack.Add(new IgnoreExtraElementsConvention(true));
-            ConventionRegistry.Register("My Solution Conventions", pack, t => true);
+3. today MongoDB is very close to a direct comparison with SQLServer.
+    it used to be a quick a dirty solution a couple years ego
+    not a enterprize/production worthy.
 
-            somewhere when creating the mongo client;
-        3. add:
-            BsonClassMap.RegisterClassMap<NameModel>(cm =>
-            {
-                cm.AutoMap();
-                cm.SetIgnoreExtraElements(true);
-            });
-            
-            when you initialize your driver.
+    today the product is on a differet level.
 
-4. lets put everithing in it's own file
+4. even thought it's a mature product...
+    DBAs will say it's not as secured as SQLServer
+    one of the reasons is a test calls ACID test
+
+5. example: I'm taking money from checking account to  savings account.
+    but the banking software removes money from checking account and crash!
+    does that money going back to my checking account?
+    if it doen't it's a problem!
+
+    all of process is called a transaction.
+
+6. ACID (Atomicity, Consistency, Isolation, Durability):
+    Atomicity: able to perform all or nothind transactions, why u think it's so important?
+    Consistency: guarantees that a transaction never leaves your database in a half-finished state.
+    Isolation: keeps transactions separated from each other until they're finished.
+    Durability: guarantees that the database will keep track of pending changes in such a way that the server can recover from an abnormal termination.
+
+7. it used to be the MongoDB couled not do that.
+    now MongoDB can do full ACID.
+    meaning your data is safe even if system crash during a transaction.
 
 
+8. why use MongoDB? 
+    things we talked about: no normalization, all data is self contained, easy selected... doubling data
+    MongoDB is cross platform (sqlserver is too now... MongoDB always was)
+    also: MongoDB is way cheaper.
+    also: MongoDB can run on a mobile device/cloud/around the globe in a sync way:
+        this means you have multiple databased syned together... it's all in the comunity free version.
+    
+9. microsoft get's that so one of the big database types in Azure called Cosmos DB. 
+    and its a NoSQL, and it even has connection point written by mongo:
+    so it will work with MongoDB databases
+    so you an use CosmosDb with your Mongo databases.
+
+10. so the thinking about storing data has really changed: 
+    no more: breaking into separated pieses for storage
+    now it's more like: "what are the records that I want, and i structure my app to use those records effitianly"
+
+11. so...SQL or NoSQL?
+    it depends, there is nore then on option 
+
+12. mocroservices: probably a nosql.
+    why? because in microservices the data is stored within the microservice.
+    - it reassy easy to spinup these little dbs as scale need them.
+    - there is no sentral place where everything talks to.
+
+13. super high volume od writes: 
+    - like twetter: mongodb is quick to write the data.
+
+14. when to use SQL?
+    - when storage size is an issue.
+    - when connecting to already exsisting relational data, and systems are useing this data as it being normalized
+    - already have a team using it.
+    - in some ways it's more intuitive 
+
+15. in greanfield app (no user application - starting from scratch [brownfield - trying to modify an exsisting application]):
+    - probably easyer with MongoDB, why do you think that is?
+        remember when adding Address or a DateOfBirth? didn't had to change a thing!
+        so as things shift and change, this ability is priceless 
+    
